@@ -5,7 +5,10 @@ const auth = require('../middlewares/auth')
 
 const {getAlltasks,createTask,getTask,updateTask,deleteTask} = require('../controllers/tasks')
 
-router.route('/',auth).get(getAlltasks).post(createTask);
-router.route('/:id',auth).get(getTask).patch(updateTask).delete(deleteTask);
+router.get('/gettasks',auth,getAlltasks)
+router.post('/addtask',auth,createTask)
+router.get('/gettask/:id',auth,getTask)
+router.patch('/updatetask/:id',auth,updateTask)
+router.delete('/deletetask/:id',auth,deleteTask);
 
 module.exports = router;

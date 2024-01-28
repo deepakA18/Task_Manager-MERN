@@ -6,7 +6,7 @@ const User = require('./model/userSchema')
 
 const tasks = require('./routes/tasks')
 const auth = require('./routes/auth')
-const mail = require('./routes/mail')
+
 
 const connectDb = require('./db/conn');
 const notFound = require('./middlewares/not-found')
@@ -18,7 +18,7 @@ app.use(express.json());  //if we don't use this we'll not have data in req.body
 app.use('/api/v1',auth)
 app.use('/api/v1/tasks',tasks);
 
-app.use('/api/v1/reminder',mail)
+
 
 app.use(notFound);
 
