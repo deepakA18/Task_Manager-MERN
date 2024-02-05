@@ -1,20 +1,4 @@
-const schedule = require('node-schedule')
-const nodemailer = require('nodemailer')
-
 const Task = require('../model/task')
-const User = require('../model/userSchema')
-
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-        type: "OAuth2",
-        user: process.env.EMAIL,
-        pass: process.env.PASS,
-    }
-})
 
 const scheduleReminder = async (taskId, taskTime,userEmail) => {
     schedule.scheduleJob(taskTime, async () => {
