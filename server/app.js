@@ -2,7 +2,6 @@ const express =  require('express');
 const app = express();
 
 const tasks = require('./routes/tasks')
-const auth = require('./routes/auth')
 
 const connectDb = require('./db/conn');
 const notFound = require('./middlewares/not-found')
@@ -11,7 +10,7 @@ require('dotenv').config({path: './routes/.env'})
 app.use(express.json());  //if we don't use this we'll not have data in req.body.
 
 
-app.use('/api/v1/auth',auth)
+
 app.use('/api/v1/tasks',tasks);
 
 app.get('/',(req,res)=>{

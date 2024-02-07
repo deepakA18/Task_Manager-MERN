@@ -11,6 +11,8 @@ module.exports = {
       'labelfont': '#4b5563',
       'blue': '#2563eb',
       'buttonhover': '#8b5cf6',
+      'hoverred': '#e11d48',
+      'hovergreen': '#22c55e',
     },
   },
   plugins: [],

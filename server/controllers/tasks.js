@@ -1,32 +1,9 @@
 const Task = require('../model/task')
 
-const scheduleReminder = async (taskId, taskTime,userEmail) => {
-    schedule.scheduleJob(taskTime, async () => {
-        const task = await Task.findById(taskId)
-        if(task && !task.completed)
-        {
-            const mailOptions =  {
-                from: process.env.EMAIL,
-                to: userEmail,
-                subject: "Task Reminder",
-                text: `Reminder it's time to do task! - ${task.name}`
-            }
-            await transporter.sendMail(mailOptions);
-            console.log("Email sent!")
-        }
-    })
-}
-
-
-
 const createTask = async (req,res) => {
 
     try {
-        const userEmail = req.userEmail;
-        const task = await Task.create({...req.body,userEmail});
-
-         scheduleReminder(task._id,task.time,userEmail);  //reminder
-        
+        const task = await Task.create(req.body);
         res.status(201).json({msg: "Task created successfully!",task });
     } catch (error) {
         res.status(500).json({msg: error})
