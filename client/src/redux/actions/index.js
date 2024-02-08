@@ -12,3 +12,12 @@ export const addTask = (data) => async(dispatch) => {
     }
    
 }
+
+export const getTask = () => async (dispatch)=> {
+    try {
+      const res = await axios.get(`${URL}/gettasks`);
+      dispatch({type: 'FETCH_TASK', payload: res.data})
+    } catch (error) {
+      console.log("Error Fetching Tasks", error)
+    }
+}
