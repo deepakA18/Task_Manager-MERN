@@ -12,6 +12,7 @@ const createTask = async (req,res) => {
         const task = await Task.create({
             name: name,
             time: req.body.time,
+            completed: req.body.completed,
         });
         await task.save();
         res.status(201).json({msg: "Task created successfully!",task });
@@ -40,15 +41,21 @@ const getAlltasks = async (req,res) => {
 
 const updateTask = async(req,res) => {
     try {
-        const task = await Task.findByIdAndUpdate({_id: req.params.id},req.body,{ //Third property 'options' in mongoose.
+
+        const isTask = await Task.findById(req.params.id);
+        if(!isTask)
+        {
+            return res.status(404).json({msg: `No task with id ${id}`})
+        }
+
+        const task = await Task.findOneAndUpdate({_id: req.params.id},{completed: !isTask.completed},{ //Third property 'options' in mongoose.
             new: true ,    //new - returns the modified document
             runValidators: true    //validate the update operation against the model's schema
  
         });
-        if(!task)
-        {
-            return res.status(404).json({msg: `No task with id ${id}`})
-        }
+
+        await task.save();
+        
         res.status(200).json({task})
     } catch (error) {
         res.status(500).json({msg: error})

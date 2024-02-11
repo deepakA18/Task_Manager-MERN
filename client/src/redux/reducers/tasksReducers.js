@@ -7,6 +7,11 @@ const tasksReducers = (state = [] , action) => {
     case 'FETCH_TASK': 
     return action.payload;
 
+    case 'UPDATE_TASK': 
+    return state.map((task)=> (
+      task._id === action.payload._id ? {...task, completed: !task.completed} : task
+    ))
+
     case 'DELETE_TASK': 
     return state.filter((task)=> task._id !== action.payload)
 

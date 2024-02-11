@@ -13,6 +13,7 @@ module.exports = {
       'buttonhover': '#8b5cf6',
       'hoverred': '#e11d48',
       'hovergreen': '#22c55e',
+      'hoveryellow': '#fde047'
     },
   },
   plugins: [],

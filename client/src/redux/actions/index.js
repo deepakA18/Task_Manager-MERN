@@ -22,6 +22,15 @@ export const getTask = () => async (dispatch)=> {
     }
 }
 
+export const updateTask = (taskId) => async (dispatch) => {
+  try {
+    const res = await axios.patch(`${URL}/updatetask/${taskId}`)
+    dispatch({type: 'UPDATE_TASK', payload: res.data})
+  } catch (error) {
+    
+  }
+}
+
 export const deleteTask = (taskId) => async(dispatch) => {
   try {
     dispatch({type: 'DELETE_TASK', payload: taskId})
