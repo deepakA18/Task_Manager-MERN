@@ -7,6 +7,9 @@ const tasksReducers = (state = [] , action) => {
     case 'FETCH_TASK': 
     return action.payload;
 
+    case 'DELETE_TASK': 
+    return state.filter((task)=> task._id !== action.payload)
+
     default:
       return state;
   }

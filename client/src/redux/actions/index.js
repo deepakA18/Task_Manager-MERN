@@ -21,3 +21,11 @@ export const getTask = () => async (dispatch)=> {
       console.log("Error Fetching Tasks", error)
     }
 }
+
+export const deleteTask = (taskId) => async(dispatch) => {
+  try {
+    dispatch({type: 'DELETE_TASK', payload: taskId})
+  } catch (error) {
+    console.log(error);
+  }
+}

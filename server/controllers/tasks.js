@@ -23,7 +23,14 @@ const createTask = async (req,res) => {
 const getAlltasks = async (req,res) => {
     try {
         const tasks = await Task.find({})
-        res.status(200).json(tasks)
+        //Converted json data to string while fetching
+        const formattedTasks = tasks.map((task) => ({
+            _id: task._id,
+            name: task.name,
+            time: new Date(task.time).toLocaleString(),
+            completed: task.completed,
+          }));
+          res.status(200).json(formattedTasks);
     } catch (error) {
         res.status(500).json({msg: error})
     }
