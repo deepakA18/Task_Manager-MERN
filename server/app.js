@@ -15,10 +15,6 @@ app.use(express.urlencoded({extended: true}))
 
 app.use('/',tasks);
 
-app.get('/',(req,res)=>{
-     res.send('Home Page')
-})
-
 app.use(notFound);
 
 

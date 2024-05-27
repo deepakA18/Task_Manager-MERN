@@ -1,4 +1,4 @@
-const Task = require('../model/task')
+const Task = require('../model/task.js')
 
 const createTask = async (req,res) => {
 
@@ -15,7 +15,7 @@ const createTask = async (req,res) => {
             completed: req.body.completed,
         });
         await task.save();
-        res.status(201).json({msg: "Task created successfully!",task });
+        res.status(201).json({task });
     } catch (error) {
         res.status(500).json({msg: error})
     } 
@@ -34,6 +34,21 @@ const getAlltasks = async (req,res) => {
           res.status(200).json(formattedTasks);
     } catch (error) {
         res.status(500).json({msg: error})
+    }
+}
+
+const getSingleTask = async(req,res) => {
+    try {
+        const id = req.params.id;
+        const task = await Task.findById(id);
+        if(!task)
+            {
+                res.status(404).json({msg: `Task with ${id} does not exists!`});
+            }
+
+            res.status().json({task});
+    } catch (error) {
+        res.status(500).json({msg: "Internal server Error!"});
     }
 }
 
@@ -69,7 +84,7 @@ const deleteTask = async (req,res) => {
         if(!deleteTask){
             return res.status(404).json({msg: `No task with id ${id}`});
         }
-        res.status(200).json({deleteTask})
+        res.status(200).json({msg: `Task with ${id} deleted successfully!`})
     } catch (error) {
         res.status(500).json({msg: error});
     }
@@ -77,6 +92,7 @@ const deleteTask = async (req,res) => {
 
 
 module.exports = {getAlltasks,
+    getSingleTask,
     createTask,
     updateTask,
     deleteTask

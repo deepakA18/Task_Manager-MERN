@@ -8,6 +8,10 @@ const taskSchema = new mongoose.Schema(
             max: [20,"length should not be more than 20"],
             trim: true,
         },
+        description:{
+            type: String,
+            default: ''
+        },
 
         completed: {
             type: Boolean,

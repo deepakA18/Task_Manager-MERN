@@ -1,12 +1,17 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+// import { useDispatch } from 'react-redux'
 
-import { updateTask } from '../redux/actions'
+// import { updateTask } from '../redux/actions'
 
 
-const Task = ({task,onDelete}) => {
+const Task = ({task,onDelete,onUpdate}) => {
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+
+  const handleUpdate = () => {
+    const updatedTask = { ...task, completed: !task.completed }; // Example update
+    onUpdate(task._id, updatedTask);
+  };
 
   return (
     <div className='mt-2 flex items-center justify-center'>
@@ -19,7 +24,7 @@ const Task = ({task,onDelete}) => {
                     </div>
                 
                 <span className='flex items-center space-x-2 pl-8'>
-                    <button className={`bg-buttonhover text-white py-1 px-4 rounded-md ${task.completed ? 'hover:bg-hoveryellow': 'hover:bg-hovergreen'}  float-right`} onClick={()=> dispatch(updateTask(task._id))}>{task.completed ? 'Not Done' : 'Done'}</button>
+                    <button className={`bg-buttonhover text-white py-1 px-4 rounded-md ${task.completed ? 'hover:bg-hoveryellow': 'hover:bg-hovergreen'}  float-right`} onClick={handleUpdate}>{task.completed ? 'Not Done' : 'Done'}</button>
                     <button className={`bg-buttonhover text-white py-1 px-4 rounded-md hover:bg-hoverred float-right`} onClick={()=> onDelete(task._id)}>Delete</button>
                 </span>
                 </div> 

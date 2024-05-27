@@ -8,20 +8,28 @@ const Card = () => {
 
   const [name,setName] = useState('');
   const [time,setTime] = useState('');
+  const [description,setDescription] = useState('');
 
   const newTask = {
     name,
     time,
+    description
   }
 
   const dispatch = useDispatch();
 
   const handleChangeName = (e) => {
+
+    console.log(e)
     setName(e.target.value);
   }
  
   const handleChangeTime = (e) => {
     setTime(e.target.value);
+  }
+
+  const handleChangeDescription = (e) => {
+    setDescription(e.target.value);
   }
 
   const handleSubmit = (e) => {
@@ -31,6 +39,7 @@ const Card = () => {
     .then(() => {
       setName('');
       setTime('');
+      setDescription('');
     })
     .catch((error) => {
       console.error('Error adding task:', error);
@@ -45,6 +54,11 @@ const Card = () => {
         <div className='mb-4'>
           <label htmlFor="taskname" className='block text-sm font-medium text-white'>Enter the Task</label>
           <input type="text" id="taskname" className='p-2 border rounded-md w-full' onChange={handleChangeName}/>
+        </div>
+
+        <div className='mb-4'>
+          <label htmlFor="description" className='block text-sm font-medium text-white'>Description</label>
+          <textarea id="description" className='mt-1 p-2 border rounded-md w-full' onChange={handleChangeDescription} value={description}></textarea>
         </div>
 
         <div className='mb-4'>
